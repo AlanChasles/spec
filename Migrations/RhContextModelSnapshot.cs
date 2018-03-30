@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using rh.Models;
 using System;
 
@@ -19,235 +18,156 @@ namespace rh.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("rh.Models.Collaborateur", b =>
+            modelBuilder.Entity("rh.Models.Image", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Addresse");
+                    b.Property<int>("ImageType");
 
-                    b.Property<string>("CodePostal");
+                    b.Property<string>("code");
 
-                    b.Property<DateTime>("DateEmbauche");
-
-                    b.Property<DateTime>("DateNaissance");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Genre");
-
-                    b.Property<string>("Nationalite");
-
-                    b.Property<string>("NoSecu");
-
-                    b.Property<string>("Nom");
-
-                    b.Property<string>("NumeroFixe");
-
-                    b.Property<string>("NumeroPortable");
-
-                    b.Property<string>("Prenom");
-
-                    b.Property<int>("ServiceId");
-
-                    b.Property<string>("Ville");
+                    b.Property<int>("pageId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("pageId");
 
-                    b.ToTable("Collaborateur");
+                    b.ToTable("Image");
                 });
 
-            modelBuilder.Entity("rh.Models.Conge", b =>
+            modelBuilder.Entity("rh.Models.Info", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CollaborateurId");
+                    b.Property<string>("commentaire");
 
-                    b.Property<string>("Commentaire");
+                    b.Property<int>("infoPageType");
 
-                    b.Property<DateTime>("DateDebut");
-
-                    b.Property<DateTime>("DateDemande");
-
-                    b.Property<DateTime>("DateFin");
-
-                    b.Property<bool>("Decision");
-
-                    b.Property<string>("NomResponsable");
-
-                    b.Property<char>("PeriodeDebut");
-
-                    b.Property<char>("PeriodeFin");
-
-                    b.Property<string>("PrenomResponsable");
-
-                    b.Property<int>("TypeCongeId");
+                    b.Property<int>("pageId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CollaborateurId");
+                    b.HasIndex("pageId");
 
-                    b.HasIndex("TypeCongeId");
-
-                    b.ToTable("Conge");
+                    b.ToTable("Info");
                 });
 
-            modelBuilder.Entity("rh.Models.Contrat", b =>
+            modelBuilder.Entity("rh.Models.Lien", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CollaborateurId");
+                    b.Property<string>("commentaire");
 
-                    b.Property<DateTime>("DateDebut");
+                    b.Property<int>("entreePageId");
 
-                    b.Property<DateTime>("DateFin");
-
-                    b.Property<int>("TypeContratId");
+                    b.Property<int>("sortiePageId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CollaborateurId");
+                    b.HasIndex("entreePageId");
 
-                    b.HasIndex("TypeContratId");
+                    b.HasIndex("sortiePageId");
 
-                    b.ToTable("Contrat");
+                    b.ToTable("Lien");
                 });
 
-            modelBuilder.Entity("rh.Models.Depense", b =>
+            modelBuilder.Entity("rh.Models.Module", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<decimal>("AvionTrain");
+                    b.Property<string>("code");
 
-                    b.Property<string>("Commentaire");
+                    b.Property<string>("nom");
 
-                    b.Property<string>("CommentaireRefus");
-
-                    b.Property<DateTime>("DateDepense");
-
-                    b.Property<decimal>("Divers");
-
-                    b.Property<decimal>("Hotel");
-
-                    b.Property<decimal>("LocationVoiture");
-
-                    b.Property<string>("MotifDepense");
-
-                    b.Property<string>("NomClient");
-
-                    b.Property<decimal>("NombreKms");
-
-                    b.Property<decimal>("ParkingPeage");
-
-                    b.Property<decimal>("Restaurant");
-
-                    b.Property<decimal>("TauxDevise");
-
-                    b.Property<decimal>("TaxiBus");
-
-                    b.Property<int>("TypeDepenseId");
-
-                    b.Property<string>("VilleClient");
+                    b.Property<int>("projetId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("TypeDepenseId");
+                    b.HasIndex("projetId");
 
-                    b.ToTable("Depense");
+                    b.ToTable("Module");
                 });
 
-            modelBuilder.Entity("rh.Models.Service", b =>
+            modelBuilder.Entity("rh.Models.Page", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Label");
+                    b.Property<string>("code");
+
+                    b.Property<string>("description");
+
+                    b.Property<int>("moduleId");
+
+                    b.Property<string>("nom");
+
+                    b.Property<int>("utilisateur");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Service");
+                    b.HasIndex("moduleId");
+
+                    b.ToTable("Page");
                 });
 
-            modelBuilder.Entity("rh.Models.TypeConge", b =>
+            modelBuilder.Entity("rh.Models.Projet", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Label");
+                    b.Property<string>("nom");
 
                     b.HasKey("ID");
 
-                    b.ToTable("TypeConge");
+                    b.ToTable("Projet");
                 });
 
-            modelBuilder.Entity("rh.Models.TypeContrat", b =>
+            modelBuilder.Entity("rh.Models.Image", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Label");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TypeContrat");
-                });
-
-            modelBuilder.Entity("rh.Models.TypeDepense", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Label");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TypeDepense");
-                });
-
-            modelBuilder.Entity("rh.Models.Collaborateur", b =>
-                {
-                    b.HasOne("rh.Models.Service", "Service")
-                        .WithMany("Collaborateurs")
-                        .HasForeignKey("ServiceId")
+                    b.HasOne("rh.Models.Page", "page")
+                        .WithMany("images")
+                        .HasForeignKey("pageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("rh.Models.Conge", b =>
+            modelBuilder.Entity("rh.Models.Info", b =>
                 {
-                    b.HasOne("rh.Models.Collaborateur", "Collaborateur")
-                        .WithMany("Conges")
-                        .HasForeignKey("CollaborateurId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("rh.Models.TypeConge", "TypeConge")
-                        .WithMany("Conges")
-                        .HasForeignKey("TypeCongeId")
+                    b.HasOne("rh.Models.Page", "page")
+                        .WithMany("infos")
+                        .HasForeignKey("pageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("rh.Models.Contrat", b =>
+            modelBuilder.Entity("rh.Models.Lien", b =>
                 {
-                    b.HasOne("rh.Models.Collaborateur", "Collaborateur")
-                        .WithMany("Contrats")
-                        .HasForeignKey("CollaborateurId")
+                    b.HasOne("rh.Models.Page", "entreePage")
+                        .WithMany("entreeLiens")
+                        .HasForeignKey("entreePageId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("rh.Models.TypeContrat", "TypeContrat")
-                        .WithMany("Contrats")
-                        .HasForeignKey("TypeContratId")
+                    b.HasOne("rh.Models.Page", "sortiePage")
+                        .WithMany("sortieLiens")
+                        .HasForeignKey("sortiePageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("rh.Models.Depense", b =>
+            modelBuilder.Entity("rh.Models.Module", b =>
                 {
-                    b.HasOne("rh.Models.TypeDepense", "TypeDepense")
-                        .WithMany("Depenses")
-                        .HasForeignKey("TypeDepenseId")
+                    b.HasOne("rh.Models.Projet", "projet")
+                        .WithMany("modules")
+                        .HasForeignKey("projetId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("rh.Models.Page", b =>
+                {
+                    b.HasOne("rh.Models.Module", "module")
+                        .WithMany("pages")
+                        .HasForeignKey("moduleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
